@@ -1,4 +1,4 @@
-# Mi Turno
+ # Mi Turno
 
 **Mi Turno** es una aplicación web desarrollada con **React** y **Node.js**, diseñada para gestionar turnos por orden de llegada, facilitando la atención al cliente o la gestión de pedidos en tiempo real. Esta herramienta es ideal para entornos donde se requiera organizar y dar seguimiento a los turnos de manera eficiente.
 
@@ -25,3 +25,8 @@ Antes de comenzar, asegúrate de tener instalados los siguientes programas:
 
 - **Node.js**: [Descargar Node.js](https://nodejs.org/)
 - **MongoDB** (si aplica): [Instalar MongoDB](https://www.mongodb.com/try/download/community)
+
+
+### Existe 2 proyectos.
+- mi-turno-app      : Frontend
+- mi-turno-servidor : Backend
