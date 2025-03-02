@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  mi_turno_servidor:
+    build:
+      context: .
+    container_name: mi_turno_servidor
+    image: mi_turno_servidor
+    working_dir: /usr/src/app
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - "8080:8080"
+    command: npm start

@@ -1,0 +1,35 @@
+# Ignorar los módulos de Node.js
+node_modules
+
+# Ignorar archivos de configuración de sistema
+.DS_Store
+Thumbs.db
+
+# Ignorar archivos de logs
+*.log
+
+# Ignorar archivos de caché de npm
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Ignorar archivos de entorno, como .env
+.env
+
+# Ignorar directorios de pruebas o desarrollo (si los tienes)
+test/
+tests/
+
+# Ignorar el archivo de lock de Yarn si usas npm (opcional)
+yarn.lock
+
+# Ignorar el directorio de dependencias de los proyectos
+bower_components
+
+# Ignorar directorios de otros entornos (opcional)
+.idea/
+.vscode/
+
+# Ignorar directorios de construcción (por ejemplo, si usas webpack o herramientas de bundling)
+dist/
+build/
