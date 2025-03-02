@@ -30,3 +30,8 @@ Antes de comenzar, asegúrate de tener instalados los siguientes programas:
 ### Existe 2 proyectos.
 - mi-turno-app      : Frontend
 - mi-turno-servidor : Backend
+
+
+## Genear imagene para producción ejecutar
+docker-compose -f docker-compose.prod.yml up --build -d
+
