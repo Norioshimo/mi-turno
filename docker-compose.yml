@@ -1,14 +1,45 @@
 version: '3.8'
 
 services:
+  mi_turno_app:
+    build:
+      context: ./mi-turno-app
+      dockerfile: Dockerfile.dev 
+    container_name: mi_turno_app
+    image: mi_turno_app
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./mi-turno-app:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - CHOKIDAR_INTERVAL=100
+    command: npm run start-watch
+    restart: always
+    tty: true  # Asignar terminal interactivo para el servidor de desarrollo
+    stdin_open: true  # Asegura que se mantenga abierto el flujo de entrada para los contenedores en desarrollo
+    networks:
+      - mi_turno_network
+      
   mi_turno_servidor:
     build:
-      context: .
+      context: ./mi-turno-servidor
+      dockerfile: Dockerfile.dev
     container_name: mi_turno_servidor
     image: mi_turno_servidor
-    working_dir: /usr/src/app
     volumes:
-      - .:/usr/src/app
+      - ./mi-turno-servidor:/usr/src/app
+      - /usr/src/app/node_modules  # Persistir node_modules fuera del contenedor
     ports:
       - "8080:8080"
-    command: npm start
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - CHOKIDAR_INTERVAL=100
+    command: npm run start-watch  # Ejecutar el comando de desarrollo
+    restart: always  # Reiniciar el contenedor si se detiene
+
+
+networks:
+  mi_turno_network:
+    driver: bridge

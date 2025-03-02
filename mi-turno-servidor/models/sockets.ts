@@ -20,7 +20,7 @@ class Sockets {
   private socketEvents(): void {
     // On connection
     this.io.on("connection", (socket: Socket) => {
-      console.log("Cliente conectado!!");
+      console.log("Cliente conectado con ID:", socket.id);
 
       socket.on("solicitar-ticket", (data: any, callback: (ticket: any) => void) => {
         const nuevoTicket = this.ticketList.createTicket();

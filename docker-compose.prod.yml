@@ -7,26 +7,20 @@ services:
       dockerfile: ${FRONTEND_DOCKERFILE}
     container_name: ${FRONTEND_CONTAINER}
     image: ${FRONTEND_IMAGE}
-    working_dir: /usr/src/app
-    volumes:
-      - ${FRONTEND_CONTEXT}:/usr/src/app
     ports:
       - "${FRONTEND_PORT}:80"
     networks:
       - mi_turno_network
   mi_turno_servidor:
-    build:
-      context: ${SERVER_CONTEXT}
-      dockerfile: ${SERVER_DOCKERFILE}
-    container_name: ${SERVER_CONTAINER}
-    image: ${SERVER_IMAGE}
-    working_dir: /usr/src/app
-    volumes:
-      - ${SERVER_CONTEXT}:/usr/src/app
-    ports:
-      - "${SERVER_PORT}:8080"
-    networks:
-      - mi_turno_network
+     build:
+       context: ${SERVER_CONTEXT}
+       dockerfile: ${SERVER_DOCKERFILE}
+     container_name: ${SERVER_CONTAINER}
+     image: ${SERVER_IMAGE}
+     ports:
+       - "${SERVER_PORT}:8080"
+     networks:
+       - mi_turno_network
 networks:
   mi_turno_network:
     driver: bridge

@@ -32,6 +32,9 @@ Antes de comenzar, asegúrate de tener instalados los siguientes programas:
 - mi-turno-servidor : Backend
 
 
-## Genear imagene para producción ejecutar
+## Genear imagene
+- Produccion
 docker-compose -f docker-compose.prod.yml up --build -d
+- Desarrollo
+docker-compose up -d
 
