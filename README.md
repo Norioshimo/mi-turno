@@ -1,4 +1,4 @@
- # Mi Turno
+# Mi Turno
 
 **Mi Turno** es una aplicación web desarrollada con **React** y **Node.js**, diseñada para gestionar turnos por orden de llegada, facilitando la atención al cliente o la gestión de pedidos en tiempo real. Esta herramienta es ideal para entornos donde se requiera organizar y dar seguimiento a los turnos de manera eficiente.
 
@@ -17,24 +17,26 @@
 - **Comunicaciones en tiempo real**: Socket.io
 - **Gestión del estado en React**: Hooks (`useState`, `useEffect`)
 
-## Instalación
+## Estructura del Proyecto
 
-### Requisitos previos
+El proyecto está compuesto por dos repositorios principales:
 
-Antes de comenzar, asegúrate de tener instalados los siguientes programas:
+- **mi-turno-app**: Frontend desarrollado con React.
+- **mi-turno-servidor**: Backend desarrollado con Node.js y Express.
 
-- **Node.js**: [Descargar Node.js](https://nodejs.org/)
-- **MongoDB** (si aplica): [Instalar MongoDB](https://www.mongodb.com/try/download/community)
+## Instalación con Docker
 
+Para desplegar la aplicación, utiliza Docker y Docker Compose.
 
-### Existe 2 proyectos.
-- mi-turno-app      : Frontend
-- mi-turno-servidor : Backend
+### Generar imagen y levantar contenedores
 
-
-## Genear imagene
-- Produccion
+#### Producción
+```sh
 docker-compose -f docker-compose.prod.yml up --build -d
-- Desarrollo
+```
+
+#### Desarrollo
+```sh
 docker-compose up -d
+```
 
