@@ -29,14 +29,18 @@ El proyecto está compuesto por dos repositorios principales:
 Para desplegar la aplicación, utiliza Docker y Docker Compose.
 
 ### Generar imagen y levantar contenedores
-
 #### Producción
 ```sh
-docker-compose -f docker-compose.prod.yml up --build -d
+docker compose -f docker-compose.prod.yml up --build -d
 ```
 
 #### Desarrollo
 ```sh
-docker-compose up -d
+docker compose up --build -d 
 ```
 
+
+#### OTROS COMANDOS
+- docker build -f Dockerfile.prod -t  mi-turno-app .
+- docker container run -d mi-turno-app
+- docker exec -it CONTAINERID /bin/sh

@@ -19,8 +19,6 @@ services:
     restart: always
     tty: true  # Asignar terminal interactivo para el servidor de desarrollo
     stdin_open: true  # Asegura que se mantenga abierto el flujo de entrada para los contenedores en desarrollo
-    networks:
-      - mi_turno_network
       
   mi_turno_servidor:
     build:
@@ -38,8 +36,3 @@ services:
       - CHOKIDAR_INTERVAL=100
     command: npm run start-watch  # Ejecutar el comando de desarrollo
     restart: always  # Reiniciar el contenedor si se detiene
-
-
-networks:
-  mi_turno_network:
-    driver: bridge

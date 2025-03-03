@@ -28,7 +28,7 @@ build/
 
 .dockerignore
 .gitignore
-
+.git
 
 Dockerfile.dev
 Dockerfile.prod
