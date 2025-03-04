@@ -9,11 +9,52 @@ services:
     image: ${FRONTEND_IMAGE}
     ports:
       - "${FRONTEND_PORT}:80"
+    restart: always
+    networks:
+      - mi_turno_network
+  
+  db:
+    container_name: ${POSTGRES_DB_NAME}
+    image: postgres:16.3
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    networks:
+      - mi_turno_network
+
+  pgAdmin:
+    depends_on:
+      - db
+    container_name: pgAdmin
+    image: dpage/pgadmin4:8.6
+    ports:
+      - "81:80"
+    environment:
+      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_PASSWORD}
+      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_EMAIL}
+    networks:
+      - mi_turno_network
+
   mi_turno_servidor:
-     build:
-       context: ${SERVER_CONTEXT}
-       dockerfile: ${SERVER_DOCKERFILE}
-     container_name: ${SERVER_CONTAINER}
-     image: ${SERVER_IMAGE}
-     ports:
-       - "${SERVER_PORT}:8080"
+    
+    depends_on:
+      - db
+    build:
+      context: ${SERVER_CONTEXT}
+      dockerfile: ${SERVER_DOCKERFILE}
+    container_name: ${SERVER_CONTAINER}
+    image: ${SERVER_IMAGE}
+    ports:
+      - "${SERVER_PORT}:8080"
+    environment:
+      - POSTGRES_DB_NAME=${POSTGRES_DB_NAME}
+      - POSTGRES_USERNAME=${POSTGRES_USERNAME}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - PORT=${SERVER_PORT}
+    restart: always # Reiniciar el contenedor si se detiene
+    networks:
+      - mi_turno_network
+
+networks:
+  mi_turno_network:
+    driver: bridge

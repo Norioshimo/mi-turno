@@ -4,7 +4,8 @@ import { Server as SocketIOServer } from "socket.io";
 import path from "path";
 import cors from "cors";
 import Sockets from "./sockets";
- 
+import db from '../db/connection';
+
 
 class Server {
   private app: Application;
@@ -15,7 +16,7 @@ class Server {
 
   constructor() {
     this.app = express();
-    this.port = process.env.PORT || 8080;
+    this.port = process.env.PORT || 8081;
 
     // Http server
     this.server = http.createServer(this.app);
@@ -26,9 +27,20 @@ class Server {
         origin: "*"
       },
     });
-
     // Inicializar sockets
     this.sockets = new Sockets(this.io);
+
+    // Conectar a la base de datos.
+    this.dbConnection();
+  }
+
+  async dbConnection() {
+    try { 
+      await db.authenticate(); 
+    } catch (error) {
+      console.log(error)
+      throw new Error("Error al conectar a la base de datos. " + error);
+    }
   }
 
   private middlewares(): void {

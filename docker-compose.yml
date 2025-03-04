@@ -8,7 +8,7 @@ services:
     container_name: mi_turno_app
     image: mi_turno_app
     ports:
-      - "3000:3000"
+      - "80:3000"
     volumes:
       - ./mi-turno-app:/usr/src/app
       - /usr/src/app/node_modules
@@ -19,20 +19,60 @@ services:
     restart: always
     tty: true  # Asignar terminal interactivo para el servidor de desarrollo
     stdin_open: true  # Asegura que se mantenga abierto el flujo de entrada para los contenedores en desarrollo
-      
+    networks:
+      - mi_turno_network
+
+  db:
+    container_name: ${POSTGRES_DB_NAME}
+    image: postgres:16.3
+    volumes:
+      - ./mi-turno-servidor/postgres:/var/lib/postgresql/data
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    networks:
+      - mi_turno_network
+
+  pgAdmin:
+    depends_on:
+      - db
+    container_name: pgAdmin
+    image: dpage/pgadmin4:8.6
+    volumes:
+      - ./mi-turno-servidor/pgadmin:/var/lib/pgadmin
+    ports:
+      - "81:80"
+    environment:
+      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_PASSWORD}
+      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_EMAIL}
+    networks:
+      - mi_turno_network
+  
   mi_turno_servidor:
     build:
       context: ./mi-turno-servidor
       dockerfile: Dockerfile.dev
     container_name: mi_turno_servidor
+    depends_on:
+      - db
     image: mi_turno_servidor
     volumes:
       - ./mi-turno-servidor:/usr/src/app
-      - /usr/src/app/node_modules  # Persistir node_modules fuera del contenedor
+      - /usr/src/app/node_modules # Persistir node_modules fuera del contenedor
     ports:
       - "8080:8080"
     environment:
       - CHOKIDAR_USEPOLLING=true
-      - CHOKIDAR_INTERVAL=100
-    command: npm run start-watch  # Ejecutar el comando de desarrollo
-    restart: always  # Reiniciar el contenedor si se detiene
+      - CHOKIDAR_INTERVAL=100 
+      - POSTGRES_DB_NAME=${POSTGRES_DB_NAME}
+      - POSTGRES_USERNAME=${POSTGRES_USERNAME}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - PORT=${SERVER_PORT}
+    command: npm run start-watch # Ejecutar el comando de desarrollo
+    restart: always # Reiniciar el contenedor si se detiene
+    networks:
+      - mi_turno_network
+
+networks:
+  mi_turno_network:
+    driver: bridge

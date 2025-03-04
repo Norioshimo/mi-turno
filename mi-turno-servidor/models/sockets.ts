@@ -23,8 +23,7 @@ class Sockets {
       console.log("Cliente conectado con ID:", socket.id);
 
       socket.on("solicitar-ticket", (data: any, callback: (ticket: any) => void) => {
-        const nuevoTicket = this.ticketList.createTicket();
-        console.log("Nuevo ticket", nuevoTicket);
+        const nuevoTicket = this.ticketList.createTicket(); 
         callback(nuevoTicket);
       });
 

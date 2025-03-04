@@ -43,7 +43,7 @@ export const CrearTicket = () => {
             <Text level={2}>Su número</Text>
             <br />
             <Text type="success" style={{ fontSize: 55 }}>
-              {ticket?.number}
+              {ticket?.numero}
             </Text>
           </Col>
         </Row>

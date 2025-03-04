@@ -42,7 +42,7 @@ export const Cola = () => {
                     <Tag color="magenta">Escritorio: {item.escritorio}</Tag>,
                   ]}
                 >
-                  <Title>No. {item.number}</Title>
+                  <Title>No. {item.numero}</Title>
                 </Card>
               </List.Item>
             )}
@@ -55,7 +55,7 @@ export const Cola = () => {
             dataSource={tickets.slice(3)}
             renderItem={(item) => (
               <List.Item.Meta
-                title={`Ticket No. ${item.number}`}
+                title={`Ticket No. ${item.numero}`}
                 description={
                   <>
                     <Text type="secondary">En el escritorio: </Text>

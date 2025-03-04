@@ -58,7 +58,7 @@ export const Escritorio = () => {
           <Col>
             <Text>Está atendiendo el ticket número: </Text>
             <Text style={{ fontSize: 30 }} type="danger">
-              {ticket.number}
+              {ticket.numero}
             </Text>
           </Col>
         </Row>
